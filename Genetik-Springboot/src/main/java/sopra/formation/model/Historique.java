@@ -48,6 +48,9 @@ public class Historique {
 	@JoinColumn(name="simulation_id")
 	@JsonView(Views.ViewHistorique.class)
 	private Simulation simulation;
+	
+	@OneToMany(mappedBy="historique")
+	private List<HistoriqueCreature> histoCrea;
 
 	
 ////////////////////////Constructor///////////////////////////////////
