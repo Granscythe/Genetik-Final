@@ -16,41 +16,58 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import sopra.formation.model.Views;
+
 @Entity
 @Table(name = "Creature")
 public class Creature {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name="vitesse")
+	@JsonView(Views.ViewCommon.class)
 	private int vitesse;
 	@Column(name="vision")
+	@JsonView(Views.ViewCommon.class)
 	private int vision;
 	@Column(name="taille")
+	@JsonView(Views.ViewCommon.class)
 	private int taille;
 	@Column(name="endurance")
+	@JsonView(Views.ViewCommon.class)
 	private int endurance;
 	@Column(name="besoinNourriture")
+	@JsonView(Views.ViewCommon.class)
 	private int besoinNourriture;
 	
 	@Column(name="estomac")
+	@JsonView(Views.ViewCommon.class)
 	private int estomac;
 	@Column(name="posX")
+	@JsonView(Views.ViewCommon.class)
 	private int posX;
 	@Column(name="posY")
+	@JsonView(Views.ViewCommon.class)
 	private int posY;
 	
 	@Column(name="statut")
+	@JsonView(Views.ViewCommon.class)
 	private boolean statut;
 	
 	@OneToOne
 	@JoinTable(name = "parents_id", joinColumns = @JoinColumn(name = "pere_id"), inverseJoinColumns = @JoinColumn(name = "mere_id"), uniqueConstraints = @UniqueConstraint(columnNames = {
 			"pere_id", "mere_id" }))
+	@JsonView(Views.ViewCreature.class)
 	private Creature pere;
 	
 	@OneToOne(mappedBy="pere")
+	@JsonView(Views.ViewCreature.class)
 	private Creature mere;
 	
 	//@Column (name="mere")
