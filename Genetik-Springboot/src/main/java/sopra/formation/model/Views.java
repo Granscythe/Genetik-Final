@@ -18,6 +18,6 @@ public class Views {
 	
 	public static class ViewSimulation extends ViewCommon{}
 	
-	public static class ViewSimuHistorique extends ViewSimulation {}
+	public static class ViewSimuHistorique extends ViewCommon {}
 	
 }
