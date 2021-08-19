@@ -1,10 +1,28 @@
 package sopra.formation.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+@Entity
+@Table(name = "CreaturePopulation")
 public class CreaturePopulation {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
+	private Long id;
+	
+	@Version
+	@JsonView(Views.ViewCommon.class)
+	private int version;
 	
 	@ManyToOne
 	@JoinColumn(name="Creature_id")
@@ -12,7 +30,7 @@ public class CreaturePopulation {
 	
 	@ManyToOne
 	@JoinColumn(name="Population_id")
-	private Population PopulationCrea;
+	private Population populationCrea;
 
 	public CreaturePopulation() {
 		super();
@@ -22,7 +40,7 @@ public class CreaturePopulation {
 	public CreaturePopulation(Creature creaturePop, Population populationCrea) {
 		super();
 		this.creaturePop = creaturePop;
-		PopulationCrea = populationCrea;
+		this.populationCrea = populationCrea;
 	}
 
 	public Creature getCreaturePop() {
@@ -34,11 +52,11 @@ public class CreaturePopulation {
 	}
 
 	public Population getPopulationCrea() {
-		return PopulationCrea;
+		return populationCrea;
 	}
 
 	public void setPopulationCrea(Population populationCrea) {
-		PopulationCrea = populationCrea;
+		populationCrea = populationCrea;
 	}
 	
 	

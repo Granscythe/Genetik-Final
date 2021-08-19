@@ -45,7 +45,7 @@ public class Population {
 	//TODO
 	@OneToMany(mappedBy="creaturePop")
 	@JsonView(Views.ViewPopulation.class)
-	private List<Creature> populationCreatures;
+	private List<CreaturePopulation> populationCreatures;
 	
 	@OneToOne
 	@JoinColumn(name="parametres_id")
@@ -113,11 +113,13 @@ public TypePopulation getType() {return type;}
 
 public void setType(TypePopulation type) {this.type = type;}
 
-public List<Creature> getPopulationCreatures() {
+
+
+public List<CreaturePopulation> getPopulationCreatures() {
 	return populationCreatures;
 }
 
-public void setPopulationCreatures(List<Creature> populationCreatures) {
+public void setPopulationCreatures(List<CreaturePopulation> populationCreatures) {
 	this.populationCreatures = populationCreatures;
 }
 
