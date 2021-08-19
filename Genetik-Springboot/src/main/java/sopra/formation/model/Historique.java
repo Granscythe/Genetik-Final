@@ -14,27 +14,33 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Historique")
 public class Historique {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long tic;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private int generationEnv;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private int generationPop;
 	@OneToMany(mappedBy="historiques")
+	@JsonView(Views.ViewHistorique.class)
 	private List<Population> populations = new ArrayList<Population>();
 	
 	@OneToOne
 	@JoinColumn(name="simulation_id")
-	private Simulation simulations;
-	@OneToOne
-	@JoinColumn(name = "simulation")
+	@JsonView(Views.ViewHistorique.class)
 	private Simulation simulation;
+
 	
 ////////////////////////Constructor///////////////////////////////////
 	
@@ -75,15 +81,16 @@ public class Historique {
 	}
 
 
-	public Simulation getSimulations() {
-		return simulations;
+	public Simulation getSimulation() {
+		return simulation;
 	}
 
 
-	public void setSimulations(Simulation simulations) {
-		this.simulations = simulations;
+	public void setSimulation(Simulation simulation) {
+		this.simulation = simulation;
 	}
-	
+
+
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	
