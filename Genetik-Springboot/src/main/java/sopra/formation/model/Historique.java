@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,11 +33,13 @@ public class Historique {
 	@Column
 	@JsonView(Views.ViewCommon.class)
 	private int generationPop;
-	@OneToMany(mappedBy="historiques")
-	@JsonView(Views.ViewHistorique.class)
-	private List<Population> populations = new ArrayList<Population>();
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name="population_id")
+	@JsonView(Views.ViewHistorique.class)
+	private Population population;
+	
+	@ManyToOne
 	@JoinColumn(name="simulation_id")
 	@JsonView(Views.ViewHistorique.class)
 	private Simulation simulation;
@@ -70,14 +73,13 @@ public class Historique {
 
 	public void setGenerationPop(int generationPop) {this.generationPop = generationPop;}
 
-
-	public List<Population> getPopulations() {
-		return populations;
+	public Population getPopulation() {
+		return population;
 	}
 
 
-	public void setPopulations(List<Population> populations) {
-		this.populations = populations;
+	public void setPopulation(Population population) {
+		this.population = population;
 	}
 
 
