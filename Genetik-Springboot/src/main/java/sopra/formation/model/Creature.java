@@ -75,8 +75,10 @@ public class Creature {
 	//private Creature mere;
 	@Column(name="generationmort")
 	private int generationMort;
+	
+	
 	@OneToMany(mappedBy = "populationCrea")
-	private List<Population> populations = new ArrayList<Population>();
+	private List<CreaturePopulation> populations;
 	
 	
 	
@@ -161,13 +163,30 @@ public class Creature {
 
 	public void setGenerationMort(int generationMort) {	this.generationMort = generationMort;}
 
-	public List<Population> getPopulations() {
+	public Creature getPere() {
+		return pere;
+	}
+
+	public void setPere(Creature pere) {
+		this.pere = pere;
+	}
+
+	public Creature getMere() {
+		return mere;
+	}
+
+	public void setMere(Creature mere) {
+		this.mere = mere;
+	}
+
+	public List<CreaturePopulation> getPopulations() {
 		return populations;
 	}
 
-	public void setPopulations(List<Population> populations) {
+	public void setPopulations(List<CreaturePopulation> populations) {
 		this.populations = populations;
-	}	
+	}
+	
 	
 	
 	
