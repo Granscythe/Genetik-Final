@@ -62,6 +62,29 @@ public class SimulationRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 	}
+	
+	
+	@GetMapping("with-histo")
+	@JsonView(Views.ViewSimuHistorique.class)
+	//TODO @PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public List<Simulation> findAllWithHistorique() {
+		return simulationRepo.findAllWithHistorique();
+	}
+	
+	@GetMapping("/{id}/with-histo")
+	@JsonView(Views.ViewSimuHistorique.class)
+	//TODO @PreAuthorize("hasAnyRole('USER','ADMIN')")
+	public Simulation findByIdWithHistorique(@PathVariable Integer id) {
+
+		Simulation simulation = simulationRepo.findByIdWithHistorique(id);
+
+		if (simulation!=null) {
+			return simulation;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
+	
 
 	@PostMapping("")
 	@JsonView(Views.ViewSimulation.class)

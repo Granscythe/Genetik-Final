@@ -36,12 +36,12 @@ public class Historique {
 	
 	@OneToOne
 	@JoinColumn(name="population_generation")
-	@JsonView(Views.ViewHistorique.class)
+	@JsonView({Views.ViewHistorique.class, Views.ViewSimuHistorique.class})
 	private Population population;
 	
 	@OneToOne
 	@JoinColumn(name="environnement_generation")
-	@JsonView(Views.ViewHistorique.class)
+	@JsonView({Views.ViewHistorique.class, Views.ViewSimuHistorique.class})
 	private Environnement environnement;
 	
 	@ManyToOne
@@ -50,6 +50,7 @@ public class Historique {
 	private Simulation simulation;
 	
 	@OneToMany(mappedBy="historique")
+	@JsonView(Views.ViewSimuHistorique.class)
 	private List<HistoriqueCreature> histoCrea;
 
 	

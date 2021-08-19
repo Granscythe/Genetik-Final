@@ -55,6 +55,19 @@ public class UserRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 	}
+	
+	@GetMapping("/{id}/parametre")
+	@JsonView(Views.ViewUserParametre.class)
+	public User findParamatre(@PathVariable Long id) {
+
+		Optional<User> optUser = userRepo.findById(id);
+
+		if (optUser.isPresent()) {
+			return optUser.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+		}
+	}
 
 	@PostMapping("")
 	@JsonView(Views.ViewUser.class)
