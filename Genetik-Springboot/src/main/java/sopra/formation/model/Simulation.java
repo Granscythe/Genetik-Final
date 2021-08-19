@@ -31,11 +31,11 @@ public class Simulation {
 	@JsonView(Views.ViewCommon.class)
 	private int version; 
 	@Column(name="nom", length = 255)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewCommon.class, Views.ViewUserParametre.class})
 	private String nom;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Mode_simulation", length = 5)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewCommon.class, Views.ViewUserParametre.class})
 	private ModeSimulation modeSimulation;
 	@ManyToOne
 	@JoinColumn(name = "user_id")

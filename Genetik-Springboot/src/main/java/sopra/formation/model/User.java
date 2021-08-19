@@ -23,16 +23,16 @@ public class User {
 	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Column(name="login", length = 255)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewCommon.class, Views.ViewUserParametre.class})
 	private String login;
 	@Column(name="Mdp", length = 255)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewCommon.class, Views.ViewUserParametre.class})
 	private String mdp;
 	@Column(name="email", length = 255)
-	@JsonView(Views.ViewCommon.class)
+	@JsonView({Views.ViewCommon.class, Views.ViewUserParametre.class})
 	private String mail;
 	@OneToMany(mappedBy= "user")
-	@JsonView(Views.ViewUser.class)
+	@JsonView({Views.ViewUser.class, Views.ViewUserParametre.class})
 	private List<Simulation> simulations;
 	
 	
