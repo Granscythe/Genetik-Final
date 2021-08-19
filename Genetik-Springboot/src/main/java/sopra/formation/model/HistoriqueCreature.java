@@ -32,10 +32,12 @@ public class HistoriqueCreature {
 	
 	@ManyToOne
 	@JoinColumn(name="ticHistorique")
+	@JsonView(Views.ViewHistoriqueCreature.class)
 	private Historique historique;
 	
 	@OneToOne
 	@JoinColumn(name="Creature")
+	@JsonView(Views.ViewHistoriqueCreature.class)
 	private Creature creature;
 	
 	
