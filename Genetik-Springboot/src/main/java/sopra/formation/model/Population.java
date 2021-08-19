@@ -19,44 +19,57 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Population")
 public class Population {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long generation;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private int limiteVitesse;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private int limiteVision;
 	@Column 
+	@JsonView(Views.ViewCommon.class)
 	private int limiteTaille;
 	
 	@ManyToMany
 	@JoinTable(name = "popCreature", joinColumns = @JoinColumn(name = "generation_id"), inverseJoinColumns = @JoinColumn(name = "creature_id"), uniqueConstraints = @UniqueConstraint(columnNames = {
 			"generation_id", "creature_id" }))
+	@JsonView(Views.ViewPopulation.class)
 	private List<Creature> populationCreatures = new ArrayList<Creature>();
 	
 	@OneToOne
 	@JoinColumn(name="parametres_id")
+	@JsonView(Views.ViewPopulation.class)
 	private ParametresGenetiques parametres;
 	
 	@ManyToOne
 	@JoinColumn(name="historique_id")
+	@JsonView(Views.ViewPopulation.class)
 	private Historique historiques;
 	
 	@ManyToOne
 	@JoinColumn(name="simulation_id")
+	@JsonView(Views.ViewPopulation.class)
 	private Simulation simulation;
 	
 	@OneToOne
 	@JoinColumn(name="environnement")
+	@JsonView(Views.ViewPopulation.class)
 	private Environnement environnement; 
 	
 	
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewCommon.class)
 	private TypePopulation type;
 	
 ////////////////Constructeur Vide/////////////////////
