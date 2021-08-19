@@ -40,8 +40,8 @@ public class Simulation {
 	private List<ParametresGenetiques> parametresGenetiques= new ArrayList<ParametresGenetiques>();
 	@OneToMany(mappedBy= "simulation")
 	private List<Population> populations= new ArrayList<Population>();
-	@OneToOne(mappedBy= "simulations")
-	private Historique historiques;
+	@OneToMany(mappedBy= "simulation")
+	private List<Historique> historiques;
 	
 	public Simulation() {
 		super();
@@ -112,17 +112,20 @@ public class Simulation {
 	public void setPopulations(List<Population> populations) {
 		this.populations = populations;
 	}
-
-	public Historique getHistoriques() {
+	
+	
+	public List<Historique> getHistoriques() {
 		return historiques;
 	}
 
-	public void setHistoriques(Historique historiques) {
+
+
+	public void setHistoriques(List<Historique> historiques) {
 		this.historiques = historiques;
 	}
 
-	
-	
+
+
 	public int getVersion() {
 		return version;
 	}
