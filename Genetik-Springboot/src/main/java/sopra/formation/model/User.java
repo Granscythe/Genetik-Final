@@ -33,7 +33,7 @@ public class User {
 	private String mail;
 	@OneToMany(mappedBy= "user")
 	@JsonView(Views.ViewUser.class)
-	private List<Simulation> simulations = new ArrayList<Simulation>();
+	private List<Simulation> simulations;
 	
 	
 	public User() {

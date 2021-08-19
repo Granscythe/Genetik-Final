@@ -49,10 +49,10 @@ public class Environnement {
 	@JoinColumn(name = "simulation")
 	@JsonView(Views.ViewEnvironnement.class)
 	private Simulation simulation;
-	@ManyToOne
-	@JoinColumn(name = "historique")
-	@JsonView(Views.ViewEnvironnement.class)
-	private Historique historique;
+//	@ManyToOne
+//	@JoinColumn(name = "historique")
+//	@JsonView(Views.ViewEnvironnement.class)
+//	private Historique historique;
 	@OneToOne(mappedBy= "environnement")
 	@JsonView(Views.ViewEnvironnement.class)
 	private Population population;
@@ -150,13 +150,13 @@ public class Environnement {
 		this.simulation = simulation;
 	}
 
-	public Historique getHistorique() {
-		return historique;
-	}
-
-	public void setHistorique(Historique historique) {
-		this.historique = historique;
-	}
+//	public Historique getHistorique() {
+//		return historique;
+//	}
+//
+//	public void setHistorique(Historique historique) {
+//		this.historique = historique;
+//	}
 
 	public Population getPopulation() {
 		return population;
