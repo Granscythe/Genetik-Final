@@ -21,76 +21,65 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
-import sopra.formation.model.User;
+import sopra.formation.model.Creature;
+import sopra.formation.model.HistoriqueCreature;
 import sopra.formation.model.Views;
-
-import sopra.formation.repository.IUserRepository;
+import sopra.formation.repository.ICreatureRepository;
+import sopra.formation.repository.IHistoriqueCreatureRepository;
 import sopra.formation.rest.exception.CreatureValidationException;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/historiqueCreature")
 @CrossOrigin("*")
-public class UserRestController {
+public class HistoriqueCreatureRestController {
 	
+	
+
 	@Autowired
-	private IUserRepository userRepo;
+	private IHistoriqueCreatureRepository histoCreaRepo;
 
 	@GetMapping("")
-	@JsonView(Views.ViewUser.class)
+	@JsonView(Views.ViewHistoriqueCreature.class)
 	//TODO @PreAuthorize("hasAnyRole('USER','ADMIN')")
-	public List<User> findAll() {
-		return userRepo.findAll();
-	}	
-	
-	@GetMapping("/{id}")
-	@JsonView(Views.ViewUser.class)
-	public User find(@PathVariable Long id) {
-
-		Optional<User> optUser = userRepo.findById(id);
-
-		if (optUser.isPresent()) {
-			return optUser.get();
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
-		}
+	public List<HistoriqueCreature> findAll() {
+		return histoCreaRepo.findAll();
 	}
 	
-	@GetMapping("/{id}/parametre")
-	@JsonView(Views.ViewUserParametre.class)
-	public User findParamatre(@PathVariable Long id) {
+	@GetMapping("/{id}")
+	@JsonView(Views.ViewHistoriqueCreature.class)
+	public HistoriqueCreature find(@PathVariable Long id) {
 
-		Optional<User> optUser = userRepo.findById(id);
+		Optional<HistoriqueCreature> optHistoriqueCreature = histoCreaRepo.findById(id);
 
-		if (optUser.isPresent()) {
-			return optUser.get();
+		if (optHistoriqueCreature.isPresent()) {
+			return optHistoriqueCreature.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 	}
 
 	@PostMapping("")
-	@JsonView(Views.ViewUser.class)
-	public User create(@Valid @RequestBody User user, BindingResult result) {
+	@JsonView(Views.ViewCreature.class)
+	public HistoriqueCreature create(@Valid @RequestBody HistoriqueCreature historiqueCreature, BindingResult result) {
 		if(result.hasErrors()) {
 			throw new CreatureValidationException();
 		}
 		
-		user = userRepo.save(user);
+		historiqueCreature = histoCreaRepo.save(historiqueCreature);
 
-		return user;
+		return historiqueCreature;
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(Views.ViewUser.class)
-	public User update(@RequestBody User user, @PathVariable Long id) {
-		if (!userRepo.existsById(id)) {
+	@JsonView(Views.ViewCreature.class)
+	public HistoriqueCreature update(@RequestBody HistoriqueCreature historiqueCreature, @PathVariable Long id) {
+		if (!histoCreaRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		user = userRepo.save(user);
+		historiqueCreature = histoCreaRepo.save(historiqueCreature);
 
-		return user;
+		return historiqueCreature;
 	}
 
 	
@@ -127,14 +116,17 @@ public class UserRestController {
 //	}
 
 	@DeleteMapping("/{id}")
-	@JsonView(Views.ViewUser.class)
+	@JsonView(Views.ViewHistoriqueCreature.class)
 	public void delete(@PathVariable Long id) {
-		if (!userRepo.existsById(id)) {
+		if (!histoCreaRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 		
-		userRepo.deleteById(id);
+		histoCreaRepo.deleteById(id);
 	}
 
 
 }
+
+
+

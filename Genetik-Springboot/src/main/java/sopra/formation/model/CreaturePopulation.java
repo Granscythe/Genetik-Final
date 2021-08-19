@@ -26,10 +26,12 @@ public class CreaturePopulation {
 	
 	@ManyToOne
 	@JoinColumn(name="Creature_id")
+	@JsonView(Views.ViewCreaturePopulation.class)
 	private Creature creaturePop;
 	
 	@ManyToOne
 	@JoinColumn(name="Population_id")
+	@JsonView(Views.ViewCreaturePopulation.class)
 	private Population populationCrea;
 
 	public CreaturePopulation() {
