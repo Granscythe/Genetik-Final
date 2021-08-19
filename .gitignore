@@ -2,3 +2,5 @@
 .DS_Store
 
 Genetik-Springboot/bin/.classpath 2
+
+Genetik-Springboot/target/classes/META-INF/maven/sopra.formation/Genetik-Springboot/pom.properties

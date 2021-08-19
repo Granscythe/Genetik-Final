@@ -90,27 +90,6 @@ public class HistoriqueRestController {
 		return Historique;
 	}
 
-	@PatchMapping("/{id}")
-	//TODO @PreAuthorize("hasRole('ADMIN')")
-	public Historique partialUpdate(@RequestBody Map<String, Object> updates, @PathVariable Long id) {
-		if (!historiqueRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
-		}
-
-		Historique HistoriqueFind = historiqueRepo.findById(id).get();
-
-		if (updates.containsKey("generationEnv")) {
-			HistoriqueFind.setGenerationEnv((Integer) updates.get("generationEnv"));
-		}
-		if (updates.containsKey("generationPop")) {
-			HistoriqueFind.setGenerationPop((Integer) updates.get("generationPop"));
-		}
-		//TODO PATCH liens ?
-
-		HistoriqueFind = historiqueRepo.save(HistoriqueFind);
-
-		return HistoriqueFind;
-	}
 
 	@DeleteMapping("/{id}")
 	//TODO @PreAuthorize("hasRole('ADMIN')")

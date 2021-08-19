@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -74,7 +75,7 @@ public class Creature {
 	//private Creature mere;
 	@Column(name="generationmort")
 	private int generationMort;
-	@ManyToMany(mappedBy = "populationCreatures")
+	@OneToMany(mappedBy = "populationCrea")
 	private List<Population> populations = new ArrayList<Population>();
 	
 	
