@@ -40,7 +40,7 @@ public class Simulation {
 	private List<ParametresGenetiques> parametresGenetiques= new ArrayList<ParametresGenetiques>();
 	@OneToMany(mappedBy= "simulation")
 	private List<Population> populations= new ArrayList<Population>();
-	@OneToOne(mappedBy= "simulations")
+	@OneToOne(mappedBy= "simulation")
 	private Historique historiques;
 	
 	public Simulation() {
