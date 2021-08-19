@@ -27,17 +27,22 @@ public class Historique {
 	@Version
 	@JsonView(Views.ViewCommon.class)
 	private int version;
-	@Column
-	@JsonView(Views.ViewCommon.class)
-	private int generationEnv;
-	@Column
-	@JsonView(Views.ViewCommon.class)
-	private int generationPop;
+//	@Column
+//	@JsonView(Views.ViewCommon.class)
+//	private int generationEnv;
+//	@Column
+//	@JsonView(Views.ViewCommon.class)
+//	private int generationPop;
 	
-	@ManyToOne
-	@JoinColumn(name="population_id")
+	@OneToOne
+	@JoinColumn(name="population_generation")
 	@JsonView(Views.ViewHistorique.class)
 	private Population population;
+	
+	@OneToOne
+	@JoinColumn(name="environnement_generation")
+	@JsonView(Views.ViewHistorique.class)
+	private Environnement environnement;
 	
 	@ManyToOne
 	@JoinColumn(name="simulation_id")
@@ -61,17 +66,6 @@ public class Historique {
 
 	public void setVersion(int version) {this.version = version;}
 
-
-	public int getGenerationEnv() {	return generationEnv;}
-
-
-	public void setGenerationEnv(int generationEnv) {this.generationEnv = generationEnv;}
-
-
-	public int getGenerationPop() {	return generationPop;}
-
-
-	public void setGenerationPop(int generationPop) {this.generationPop = generationPop;}
 
 	public Population getPopulation() {
 		return population;

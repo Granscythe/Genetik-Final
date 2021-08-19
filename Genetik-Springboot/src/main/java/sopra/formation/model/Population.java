@@ -42,20 +42,19 @@ public class Population {
 	@JsonView(Views.ViewCommon.class)
 	private int limiteTaille;
 	
-	@ManyToMany
-	@JoinTable(name = "popCreature", joinColumns = @JoinColumn(name = "generation_id"), inverseJoinColumns = @JoinColumn(name = "creature_id"), uniqueConstraints = @UniqueConstraint(columnNames = {
-			"generation_id", "creature_id" }))
+	//TODO
+	@OneToMany(mappedBy="creaturePop")
 	@JsonView(Views.ViewPopulation.class)
-	private List<Creature> populationCreatures = new ArrayList<Creature>();
+	private List<Creature> populationCreatures;
 	
 	@OneToOne
 	@JoinColumn(name="parametres_id")
 	@JsonView(Views.ViewPopulation.class)
 	private ParametresGenetiques parametres;
 	
-	@OneToMany(mappedBy="population")
-	@JsonView(Views.ViewPopulation.class)
-	private List<Historique> historiques;
+//	@OneToMany(mappedBy="population")
+//	@JsonView(Views.ViewPopulation.class)
+//	private List<Historique> historiques;
 	
 	@ManyToOne
 	@JoinColumn(name="simulation_id")
@@ -130,13 +129,13 @@ public void setParametres(ParametresGenetiques parametres) {
 	this.parametres = parametres;
 }
 
-public List<Historique> getHistoriques() {
-	return historiques;
-}
-
-public void setHistoriques(List<Historique> historiques) {
-	this.historiques = historiques;
-}
+//public List<Historique> getHistoriques() {
+//	return historiques;
+//}
+//
+//public void setHistoriques(List<Historique> historiques) {
+//	this.historiques = historiques;
+//}
 
 public Simulation getSimulation() {
 	return simulation;
