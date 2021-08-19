@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -52,10 +53,9 @@ public class Population {
 	@JsonView(Views.ViewPopulation.class)
 	private ParametresGenetiques parametres;
 	
-	@ManyToOne
-	@JoinColumn(name="historique_id")
+	@OneToMany(mappedBy="population")
 	@JsonView(Views.ViewPopulation.class)
-	private Historique historiques;
+	private List<Historique> historiques;
 	
 	@ManyToOne
 	@JoinColumn(name="simulation_id")
@@ -130,11 +130,11 @@ public void setParametres(ParametresGenetiques parametres) {
 	this.parametres = parametres;
 }
 
-public Historique getHistoriques() {
+public List<Historique> getHistoriques() {
 	return historiques;
 }
 
-public void setHistoriques(Historique historiques) {
+public void setHistoriques(List<Historique> historiques) {
 	this.historiques = historiques;
 }
 
