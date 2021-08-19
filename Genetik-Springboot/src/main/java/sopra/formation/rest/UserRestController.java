@@ -1,6 +1,5 @@
 package sopra.formation.rest;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,65 +21,63 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import sopra.formation.model.Creature;
 
+import sopra.formation.model.User;
 import sopra.formation.model.Views;
-import sopra.formation.repository.ICreatureRepository;
+
+import sopra.formation.repository.IUserRepository;
 import sopra.formation.rest.exception.CreatureValidationException;
 
-
 @RestController
-@RequestMapping("/creature")
+@RequestMapping("/user")
 @CrossOrigin("*")
-public class CreatureRestController {
+public class UserRestController {
 	
-	
-
 	@Autowired
-	private ICreatureRepository creatureRepo;
+	private IUserRepository userRepo;
 
 	@GetMapping("")
-	@JsonView(Views.ViewCreature.class)
+	@JsonView(Views.ViewUser.class)
 	//TODO @PreAuthorize("hasAnyRole('USER','ADMIN')")
-	public List<Creature> findAll() {
-		return creatureRepo.findAll();
-	}
+	public List<User> findAll() {
+		return userRepo.findAll();
+	}	
 	
 	@GetMapping("/{id}")
-	@JsonView(Views.ViewCreature.class)
-	public Creature find(@PathVariable Long id) {
+	@JsonView(Views.ViewUser.class)
+	public User find(@PathVariable Long id) {
 
-		Optional<Creature> optCreature = creatureRepo.findById(id);
+		Optional<User> optUser = userRepo.findById(id);
 
-		if (optCreature.isPresent()) {
-			return optCreature.get();
+		if (optUser.isPresent()) {
+			return optUser.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 	}
 
 	@PostMapping("")
-	@JsonView(Views.ViewCreature.class)
-	public Creature create(@Valid @RequestBody Creature creature, BindingResult result) {
+	@JsonView(Views.ViewUser.class)
+	public User create(@Valid @RequestBody User user, BindingResult result) {
 		if(result.hasErrors()) {
 			throw new CreatureValidationException();
 		}
 		
-		creature = creatureRepo.save(creature);
+		user = userRepo.save(user);
 
-		return creature;
+		return user;
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(Views.ViewCreature.class)
-	public Creature update(@RequestBody Creature creature, @PathVariable Long id) {
-		if (!creatureRepo.existsById(id)) {
+	@JsonView(Views.ViewUser.class)
+	public User update(@RequestBody User user, @PathVariable Long id) {
+		if (!userRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		creature = creatureRepo.save(creature);
+		user = userRepo.save(user);
 
-		return creature;
+		return user;
 	}
 
 	
@@ -118,13 +114,13 @@ public class CreatureRestController {
 //	}
 
 	@DeleteMapping("/{id}")
-	@JsonView(Views.ViewCreature.class)
+	@JsonView(Views.ViewUser.class)
 	public void delete(@PathVariable Long id) {
-		if (!creatureRepo.existsById(id)) {
+		if (!userRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 		
-		creatureRepo.deleteById(id);
+		userRepo.deleteById(id);
 	}
 
 

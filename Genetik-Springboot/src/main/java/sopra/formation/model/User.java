@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name = "utilisateur")
@@ -18,14 +20,19 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Column(name="login", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private String login;
 	@Column(name="Mdp", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private String mdp;
 	@Column(name="email", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private String mail;
 	@OneToMany(mappedBy= "user")
+	@JsonView(Views.ViewUser.class)
 	private List<Simulation> simulations = new ArrayList<Simulation>();
 	
 	
