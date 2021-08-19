@@ -4,4 +4,7 @@ public class Views {
 
 	public static class ViewCommon {}
 	
+	public static class ViewHistorique extends ViewCommon {}
+	
+	
 }
