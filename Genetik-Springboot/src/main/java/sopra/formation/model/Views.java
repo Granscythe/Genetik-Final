@@ -18,4 +18,7 @@ public class Views {
 	
 	public static class ViewSimulation extends ViewCommon{}
 	
+	public static class ViewCreaturePopulation extends ViewCommon {}
+	
+	public static class ViewHistoriqueCreature extends ViewCommon {}
 }
