@@ -14,23 +14,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "ParametresGenetiques")
 public class ParametresGenetiques {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private int tauxMutation;
 	@Column
+	@JsonView(Views.ViewCommon.class)
 	private double transmission;
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewCommon.class)
 	private TypeMutation mutation;
-	
 	@ManyToOne
 	@JoinColumn(name="simulation_id")
+	@JsonView(Views.ViewParametresGenetiques.class)
 	private Simulation simulation;
 	
 

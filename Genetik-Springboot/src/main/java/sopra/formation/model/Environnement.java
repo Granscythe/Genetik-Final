@@ -13,35 +13,48 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "environnement")
 public class Environnement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Integer generation;
 	@Version 
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name="taille_x", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private Integer taillex;
 	@Column(name="taille_y", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private Integer tailley;
 	@Column(name="pct_nourriture", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private Integer pct_nourriture;
 	@Column(name="max_creature", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private Integer max_creature;
 	@Column(name="terrain", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private String terrain;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Type_terrain", length = 5)
+	@JsonView(Views.ViewCommon.class)
 	private TypeTerrain typeTerrain;
 	@ManyToOne
 	@JoinColumn(name = "simulation")
+	@JsonView(Views.ViewEnvironnement.class)
 	private Simulation simulation;
 	@ManyToOne
 	@JoinColumn(name = "historique")
+	@JsonView(Views.ViewEnvironnement.class)
 	private Historique historique;
 	@OneToOne(mappedBy= "environnement")
+	@JsonView(Views.ViewEnvironnement.class)
 	private Population population;
 
 	public Environnement() {
