@@ -39,16 +39,19 @@ public class Simulation {
 	private ModeSimulation modeSimulation;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@JsonView(Views.ViewSimulation.class)
+	@JsonView(Views.ViewCommon.class)
 	private User user;
 	@OneToMany(mappedBy= "simulation")
+	@JsonView(Views.ViewSimulation.class)
 	private List<Environnement> environements;
 	@OneToMany(mappedBy= "simulation")
+	@JsonView(Views.ViewSimulation.class)
 	private List<ParametresGenetiques> parametresGenetiques;
 	@OneToMany(mappedBy= "simulation")
+	@JsonView(Views.ViewSimulation.class)
 	private List<Population> populations;
 	@OneToMany(mappedBy= "simulation")
-	@JsonView(Views.ViewSimulation.class)
+	@JsonView(Views.ViewSimuHistorique.class)
 	private List<Historique> historiques;
 	
 	public Simulation() {
