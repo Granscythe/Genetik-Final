@@ -17,22 +17,29 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "simulation")
 public class Simulation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version 
+	@JsonView(Views.ViewCommon.class)
 	private int version; 
 	@Column(name="nom", length = 255)
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Mode_simulation", length = 5)
+	@JsonView(Views.ViewCommon.class)
 	private ModeSimulation modeSimulation;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonView(Views.ViewSimulation.class)
 	private User user;
 	@OneToMany(mappedBy= "simulation")
 	private List<Environnement> environements;
@@ -41,6 +48,7 @@ public class Simulation {
 	@OneToMany(mappedBy= "simulation")
 	private List<Population> populations;
 	@OneToMany(mappedBy= "simulation")
+	@JsonView(Views.ViewSimulation.class)
 	private List<Historique> historiques;
 	
 	public Simulation() {
